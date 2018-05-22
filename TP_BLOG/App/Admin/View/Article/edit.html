@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/js/libs/modernizr.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/ueditor/ueditor.all.min.js"></script>
+</head>
+<body>
+<include file="Public/head" />
+<div class="container clearfix">
+<include file="Public/left" />
+    <!--/sidebar-->
+    <div class="main-wrap">
+
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a href="__INDEX__">首页</a><span class="crumb-step">&gt;</span><a class="crumb-name" href="__MODULE__/Link/lst">文章管理</a><span class="crumb-step">&gt;</span><span>新增文章</span></div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-content">
+                <form action="" method="post" id="myform" name="myform" enctype="multipart/form-data" >
+                    <table class="insert-tab" width="100%">
+                        <tbody>
+                            <tr>
+                                <th><i class="require-red">*</i>文章名称：</th>
+                                <td>
+                                    <input class="common-text required" id="title" name="title" size="50" value="{$articler.title}" type="text">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>文章描述：</th>
+                                <td>
+                                    <textarea style="width:420px; height: 100px;" name="desc">{$articler.desc}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>缩略图：</th>
+                                <td>
+                                    <input id="pic" name="pic" size="50" value="" type="file">
+                                    <if condition="$articler['pic'] neq '' ">
+                                        <img src="__ROOT__{$articler.pic}" height="50">
+                                    <else />
+                                        无缩略图
+                                    </if>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i>所属栏目：</i></th>
+                                <td>
+                                    <select name="cateid">
+                                        <option value="0">选择分类</option>
+
+                                    <volist name="cateres" id="vo">
+
+                                        <option <if condition="$vo['id'] eq $articler['cateid']">selected="selected"</if> value="{$vo.id}">{$vo.catename}</option>
+                                    </volist>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><i class="require-red">*</i>内容：</th>
+                                <td>
+                                    <textarea id="content" name="content">{$articler.content}</textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <td>
+                                    <input class="btn btn-primary btn6 mr10" value="提交" type="submit">
+                                    <input class="btn btn6" onclick="history.go(-1)" value="返回" type="button">
+                                </td>
+                            </tr>
+                        </tbody></table>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <!--/<main--></main-->
+</div>
+<script type="text/javascript">
+        UE.getEditor('content' , {
+            initialFrameWidth:1000,
+            initialFrameHeight:200,
+            toolbars: [
+    ['bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc']
+]
+        });
+
+    </script>
+</body>
+</html>
